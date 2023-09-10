@@ -101,7 +101,8 @@ class TrendAnalyzer:
 
     def update_frequency(self, keywords):
         for keyword in keywords:
-            self.keyword_frequency[keyword] = self.keyword_frequency.get(keyword, 0) + 1
+            self.keyword_frequency[keyword] = self.keyword_frequency.get(
+                keyword, 0) + 1
 
     def update_sentiment(self, keywords, sentiment):
         for keyword in keywords:
@@ -179,7 +180,8 @@ class NewsAggregator:
 
         for article in articles:
             entities = self.nlp_processor.extract_entities(article["summary"])
-            sentiment = self.nlp_processor.analyze_sentiment(article["summary"])
+            sentiment = self.nlp_processor.analyze_sentiment(
+                article["summary"])
             summary = self.nlp_processor.generate_summary(article["summary"])
 
             article["entities"] = entities
@@ -189,7 +191,8 @@ class NewsAggregator:
             analyzed_articles.append(article)
 
         self.trend_analyzer.analyze_trends(analyzed_articles)
-        categorized_articles = self.article_categorizer.categorize_articles(analyzed_articles)
+        categorized_articles = self.article_categorizer.categorize_articles(
+            analyzed_articles)
         self.news_feed.articles = categorized_articles
 
     def set_user_preferences(self, user_id, preferences):
@@ -208,7 +211,8 @@ class NewsAggregator:
 news_aggregator = NewsAggregator()
 
 # Scrape and analyze articles
-news_aggregator.scrape_and_analyze_articles(topic="technology", keywords="python programming", sources=["source1", "source2"])
+news_aggregator.scrape_and_analyze_articles(
+    topic="technology", keywords="python programming", sources=["source1", "source2"])
 
 # Set user preferences
 user_id = 1
