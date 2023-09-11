@@ -1,7 +1,8 @@
-import requests
-from bs4 import BeautifulSoup
-from transformers import pipeline
 import json
+from transformers import pipeline
+from bs4 import BeautifulSoup
+import requests
+Optimized Python script:
 
 
 class WebScraper:
@@ -14,13 +15,13 @@ class WebScraper:
         articles = []
 
         if topic:
-            articles += self.scrape_by_topic(topic)
+            articles.extend(self.scrape_by_topic(topic))
 
         if keywords:
-            articles += self.scrape_by_keywords(keywords)
+            articles.extend(self.scrape_by_keywords(keywords))
 
         if sources:
-            articles += self.scrape_by_sources(sources)
+            articles.extend(self.scrape_by_sources(sources))
 
         return articles
 
@@ -44,7 +45,7 @@ class WebScraper:
             url = f"https://newswebsite.com/source/{source}"
             response = requests.get(url, headers=self.headers)
             soup = BeautifulSoup(response.content, "html.parser")
-            articles += self.extract_articles(soup)
+            articles.extend(self.extract_articles(soup))
         return articles
 
     def extract_articles(self, soup):
@@ -121,12 +122,12 @@ class NewsFeed:
         preferences = self.user_preferences.get(user_id)
         recommended_articles = []
 
-        for article in self.articles:
-            if preferences:
+        if preferences:
+            for article in self.articles:
                 if article["category"] in preferences:
                     recommended_articles.append(article)
-            else:
-                recommended_articles.append(article)
+        else:
+            recommended_articles.extend(self.articles)
 
         return recommended_articles
 
